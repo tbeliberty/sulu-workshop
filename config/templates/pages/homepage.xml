@@ -59,5 +59,50 @@
                 <title lang="de">Veranstaltungs Highlights</title>
             </meta>
         </property>
+        <block name="blocks" default-type="editor_image" minOccurs="0">
+            <meta>
+                <title lang="de">Inhalte</title>
+                <title lang="en">Content</title>
+            </meta>
+
+            <params>
+                <param name="add_button_text">
+                    <meta>
+                        <title lang="en">Add track</title>
+                        <title lang="de">Track hinzufügen</title>
+                    </meta>
+                </param>
+            </params>
+
+            <types>
+                <type name="editor_image">
+                    <meta>
+                        <title lang="de">Editor mit Bild</title>
+                        <title lang="en">Editor with image</title>
+                    </meta>
+
+                    <properties>
+                        <property name="images" type="media_selection" colspan="3">
+                            <meta>
+                                <title lang="de">Bilder</title>
+                                <title lang="en">Images</title>
+                            </meta>
+
+                            <tag name="sulu.block_preview" priority="512"/>
+                        </property>
+
+                        <property name="article" type="text_editor" colspan="9">
+                            <meta>
+                                <title lang="de">Artikel</title>
+                                <title lang="en">Article</title>
+                            </meta>
+
+                            <tag name="sulu.block_preview" priority="1024"/>
+                        </property>
+                    </properties>
+                </type>
+            </types>
+        </block>
+
     </properties>
 </template>
