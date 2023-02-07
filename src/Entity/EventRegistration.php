@@ -52,6 +52,13 @@ class EventRegistration
         return $this->event;
     }
 
+    public function setEvent(Event $event): self
+    {
+        $this->event = $event;
+
+        return $this;
+    }
+
     public function getFirstName(): ?string
     {
         return $this->firstName;
@@ -99,4 +106,6 @@ class EventRegistration
 
         return $this;
     }
+
+
 }

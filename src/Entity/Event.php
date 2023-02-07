@@ -46,13 +46,13 @@ class Event
 
     private string $locale;
 
-    #[ORM\OneToMany(mappedBy: 'events', targetEntity: EventRegistrations::class, orphanRemoval: true)]
-    private Collection $eventRegistrations;
+    #[ORM\OneToMany(mappedBy: 'event', targetEntity: EventRegistration::class, orphanRemoval: true)]
+    private Collection $eventRegistration;
 
     public function __construct()
     {
         $this->translations = new ArrayCollection();
-        $this->eventRegistrations = new ArrayCollection();
+        $this->eventRegistration = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -224,31 +224,26 @@ class Event
     }
 
     /**
-     * @return Collection<int, EventRegistrations>
+     * @return Collection<int, EventRegistration>
      */
-    public function getEventRegistrations(): Collection
+    public function getEventRegistration(): Collection
     {
-        return $this->eventRegistrations;
+        return $this->eventRegistration;
     }
 
-    public function addEventRegistration(EventRegistrations $eventRegistration): self
+    public function addEventRegistration(EventRegistration $eventRegistration): self
     {
-        if (!$this->eventRegistrations->contains($eventRegistration)) {
-            $this->eventRegistrations->add($eventRegistration);
-            $eventRegistration->setEvents($this);
+        if (!$this->eventRegistration->contains($eventRegistration)) {
+            $this->eventRegistration->add($eventRegistration);
+            $eventRegistration->setEvent($this);
         }
 
         return $this;
     }
 
-    public function removeEventRegistration(EventRegistrations $eventRegistration): self
+    public function removeEventRegistration(EventRegistration $eventRegistration): self
     {
-        if ($this->eventRegistrations->removeElement($eventRegistration)) {
-            // set the owning side to null (unless already changed)
-            if ($eventRegistration->getEvents() === $this) {
-                $eventRegistration->setEvents(null);
-            }
-        }
+        $this->eventRegistration->removeElement($eventRegistration);
 
         return $this;
     }
