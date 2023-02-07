@@ -15,6 +15,7 @@
     <default-templates>
         <default-template type="page">default</default-template>
         <default-template type="home">homepage</default-template>
+        <default-template type="contacts">contacts</default-template>
     </default-templates>
 
     <templates>
@@ -29,6 +30,11 @@
                 <meta>
                     <title lang="en">Main Navigation</title>
                     <title lang="de">Hauptnavigation</title>
+                </meta>
+            </context>
+            <context key="footer">
+                <meta>
+                    <title lang="en">Footer Navigation</title>
                 </meta>
             </context>
         </contexts>

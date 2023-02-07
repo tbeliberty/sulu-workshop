@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Assignement</title>
 
     {% block meta %}
         {% include "@SuluWebsite/Extension/seo.html.twig" with {
@@ -58,6 +59,13 @@
         {% block footer %}
             <div class="container">
                 <span class="text-muted">Copyright {{ 'now'|date('Y') }} SULU</span>
+                <ul class="navbar-nav mr-auto">
+                    {% for item in sulu_navigation_root_tree('footer') %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ sulu_content_path(item.url) }}">{{ item.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
             </div>
         {% endblock %}
     </footer>
