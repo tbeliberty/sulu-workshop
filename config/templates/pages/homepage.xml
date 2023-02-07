@@ -11,6 +11,7 @@
 
     <meta>
         <title lang="en">Homepage</title>
+        <title lang="fr">Accueil</title>
         <title lang="de">Startseite</title>
     </meta>
 
@@ -18,6 +19,7 @@
         <property name="title" type="text_line" mandatory="true">
             <meta>
                 <title lang="en">Title</title>
+                <title lang="fr">Titre</title>
                 <title lang="de">Titel</title>
             </meta>
             <params>
@@ -30,6 +32,7 @@
         <property name="url" type="resource_locator" mandatory="true">
             <meta>
                 <title lang="en">Resourcelocator</title>
+                <title lang="fr">Url</title>
                 <title lang="de">Adresse</title>
             </meta>
 
@@ -39,6 +42,7 @@
         <property name="headerImage" type="single_media_selection">
             <meta>
                 <title lang="en">Header Image</title>
+                <title lang="fr">Header Image</title>
                 <title lang="de">Veranstaltungs Highlights</title>
             </meta>
             <params>
@@ -49,6 +53,7 @@
         <property name="article" type="text_editor">
             <meta>
                 <title lang="en">Article</title>
+                <title lang="fr">Article</title>
                 <title lang="de">Artikel</title>
             </meta>
         </property>
@@ -56,23 +61,27 @@
         <property name="events" type="event_selection">
             <meta>
                 <title lang="en">Event Highlights</title>
+                <title lang="fr">Evènement</title>
                 <title lang="de">Veranstaltungs Highlights</title>
             </meta>
         </property>
         <block name="blocks" default-type="text" minOccurs="0">
             <meta>
                 <title lang="en">Content</title>
+                <title lang="fr">Contenu</title>
             </meta>
 
             <types>
                 <type name="text">
                     <meta>
                         <title lang="en">Text</title>
+                        <title lang="fr">Texte</title>
                     </meta>
                     <properties>
                         <property name="title" type="text_line">
                             <meta>
                                 <title lang="en">Title</title>
+                                <title lang="fr">Titre</title>
                             </meta>
                         </property>
                     </properties>
@@ -83,6 +92,7 @@
                         <property name="image" type="single_media_selection">
                             <meta>
                                 <title lang="en">Image</title>
+                                <title lang="fr">Image</title>
                             </meta>
                             <params>
                                 <param name="types" value="image"/>
@@ -96,11 +106,13 @@
                         <property name="text" type="text_line">
                             <meta>
                                 <title lang="en">Text</title>
+                                <title lang="fr">Texte</title>
                             </meta>
                         </property>
                         <property name="author" type="text_line">
                             <meta>
                                 <title lang="en">Author</title>
+                                <title lang="fr">Auteur</title>
                             </meta>
                         </property>
                     </properties>
