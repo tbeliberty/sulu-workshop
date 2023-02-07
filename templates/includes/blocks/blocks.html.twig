@@ -1,0 +1,3 @@
+{% for block in content.blocks %}
+    {% include '/includes/blocks/block-types/' ~ block.type ~ '.html.twig' with  {content: block, view: view.blocks[loop.index0]} %}
+{% endfor %}

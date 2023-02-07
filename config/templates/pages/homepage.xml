@@ -59,45 +59,49 @@
                 <title lang="de">Veranstaltungs Highlights</title>
             </meta>
         </property>
-        <block name="blocks" default-type="editor_image" minOccurs="0">
+        <block name="blocks" default-type="text" minOccurs="0">
             <meta>
-                <title lang="de">Inhalte</title>
                 <title lang="en">Content</title>
             </meta>
 
-            <params>
-                <param name="add_button_text">
-                    <meta>
-                        <title lang="en">Add track</title>
-                        <title lang="de">Track hinzufügen</title>
-                    </meta>
-                </param>
-            </params>
-
             <types>
-                <type name="editor_image">
+                <type name="text">
                     <meta>
-                        <title lang="de">Editor mit Bild</title>
-                        <title lang="en">Editor with image</title>
+                        <title lang="en">Text</title>
                     </meta>
-
                     <properties>
-                        <property name="images" type="media_selection" colspan="3">
+                        <property name="title" type="text_line">
                             <meta>
-                                <title lang="de">Bilder</title>
-                                <title lang="en">Images</title>
+                                <title lang="en">Title</title>
                             </meta>
-
-                            <tag name="sulu.block_preview" priority="512"/>
                         </property>
+                    </properties>
+                </type>
 
-                        <property name="article" type="text_editor" colspan="9">
+                <type name="gallery">
+                    <properties>
+                        <property name="image" type="single_media_selection">
                             <meta>
-                                <title lang="de">Artikel</title>
-                                <title lang="en">Article</title>
+                                <title lang="en">Image</title>
                             </meta>
+                            <params>
+                                <param name="types" value="image"/>
+                            </params>
+                        </property>
+                    </properties>
+                </type>
 
-                            <tag name="sulu.block_preview" priority="1024"/>
+                <type name="quote">
+                    <properties>
+                        <property name="text" type="text_line">
+                            <meta>
+                                <title lang="en">Text</title>
+                            </meta>
+                        </property>
+                        <property name="author" type="text_line">
+                            <meta>
+                                <title lang="en">Author</title>
+                            </meta>
                         </property>
                     </properties>
                 </type>
