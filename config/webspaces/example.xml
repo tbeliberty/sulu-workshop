@@ -10,13 +10,13 @@
     <localizations>
         <!-- See: http://docs.sulu.io/en/latest/book/localization.html how to add new localizations -->
         <localization language="en" default="true"/>
+        <localization language="de"/>
         <localization language="fr"/>
     </localizations>
 
     <default-templates>
         <default-template type="page">default</default-template>
         <default-template type="home">homepage</default-template>
-        <default-template type="contacts">contacts</default-template>
     </default-templates>
 
     <templates>
@@ -30,13 +30,13 @@
             <context key="main">
                 <meta>
                     <title lang="en">Main Navigation</title>
-                    <title lang="fr">Menu</title>
+                    <title lang="de">Hauptnavigation</title>
                 </meta>
             </context>
             <context key="footer">
                 <meta>
                     <title lang="en">Footer Navigation</title>
-                    <title lang="fr">Footer menu</title>
+                    <title lang="de">Footernavigation</title>
                 </meta>
             </context>
         </contexts>

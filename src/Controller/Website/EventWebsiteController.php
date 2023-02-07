@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Controller\Website;
 
 use App\Entity\Event;
-use App\Entity\EventRegistrations;
-use App\Form\EventRegistrationsType;
+use App\Form\EventRegistrationType;
+use App\Repository\EventRegistrationRepository;
 use App\Repository\EventRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Sulu\Bundle\WebsiteBundle\Resolver\TemplateAttributeResolverInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,35 +21,50 @@ class EventWebsiteController extends AbstractController
     public function __construct(
         private readonly EventRepository $eventRepository,
         private readonly TemplateAttributeResolverInterface $templateAttributeResolver,
+        private readonly EventRegistrationRepository $eventRegistrationRepository,
     ) {
     }
 
     #[Route('/{_locale}/event/{id}', name: 'app.event')]
-    public function indexAction(int $id, Request $request, EntityManagerInterface $em): Response
+    public function indexAction(int $id, Request $request): Response
     {
-        $success = null;
         $event = $this->eventRepository->findById($id, $request->getLocale());
         if (!$event instanceof Event) {
             throw new NotFoundHttpException();
         }
-        $registration = new EventRegistrations();
-        $registration->setEvents($event);
-        $form = $this->createForm(EventRegistrationsType::class, $registration);
+
+        $registration = $this->eventRegistrationRepository->create($event);
+        $form = $this->createForm(EventRegistrationType::class, $registration);
+        $form->add(
+            'submit',
+            SubmitType::class,
+            [
+                'label' => 'Create',
+            ],
+        );
+
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($registration);
-            $em->flush();
-            $success = true;
-            return $this->redirectToRoute('app.event', ['id' => $event->getId(),'success' => true,]);
+            $this->eventRegistrationRepository->save($registration);
+
+            return $this->redirectToRoute(
+                'app.event',
+                [
+                    'id' => $event->getId(),
+                    'success' => true,
+                ],
+            );
         }
+
         return $this->render(
             'events/index.html.twig',
             $this->templateAttributeResolver->resolve(
                 [
                     'event' => $event,
-                    'content' => ['title' => $event->getTitle()],
+                    'success' => $request->query->get('success'),
                     'form' => $form->createView(),
-                    'success' => $request->query->get('success')
+                    'content' => ['title' => $event->getTitle()],
                 ],
             ),
         );

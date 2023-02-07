@@ -12,7 +12,7 @@ use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class HomepageTest extends SuluTestCase
+class EventOverviewTest extends SuluTestCase
 {
     use EventTrait;
     use PageTrait;
@@ -25,7 +25,7 @@ class HomepageTest extends SuluTestCase
         $this->initPhpcr();
     }
 
-    public function testHomepage(): void
+    public function testEventOverview(): void
     {
         $event1 = $this->createEvent('Sulu is awesome', 'en');
         $this->enableEvent($event1);
@@ -34,20 +34,16 @@ class HomepageTest extends SuluTestCase
         $event3 = $this->createEvent('Disabled', 'en');
 
         $this->createPage(
-            'homepage',
+            'event_overview',
             'example',
             [
                 'title' => 'Symfony Live',
-                'url' => '/homepage',
+                'url' => '/events',
                 'published' => true,
-                'events' => [
-                    $event1->getId(),
-                    $event2->getId(),
-                ],
             ],
         );
 
-        $crawler = $this->client->request(Request::METHOD_GET, '/en/homepage');
+        $crawler = $this->client->request(Request::METHOD_GET, '/en/events');
 
         $response = $this->client->getResponse();
         $this->assertInstanceOf(Response::class, $response);

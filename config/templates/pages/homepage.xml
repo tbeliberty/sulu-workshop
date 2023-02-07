@@ -11,7 +11,6 @@
 
     <meta>
         <title lang="en">Homepage</title>
-        <title lang="fr">Accueil</title>
         <title lang="de">Startseite</title>
     </meta>
 
@@ -19,7 +18,6 @@
         <property name="title" type="text_line" mandatory="true">
             <meta>
                 <title lang="en">Title</title>
-                <title lang="fr">Titre</title>
                 <title lang="de">Titel</title>
             </meta>
             <params>
@@ -32,7 +30,6 @@
         <property name="url" type="resource_locator" mandatory="true">
             <meta>
                 <title lang="en">Resourcelocator</title>
-                <title lang="fr">Url</title>
                 <title lang="de">Adresse</title>
             </meta>
 
@@ -41,10 +38,10 @@
 
         <property name="headerImage" type="single_media_selection">
             <meta>
-                <title lang="en">Header Image</title>
-                <title lang="fr">Header Image</title>
-                <title lang="de">Veranstaltungs Highlights</title>
+                <title lang="en">Header image</title>
+                <title lang="de">Titelbild</title>
             </meta>
+
             <params>
                 <param name="types" value="image"/>
             </params>
@@ -53,7 +50,6 @@
         <property name="article" type="text_editor">
             <meta>
                 <title lang="en">Article</title>
-                <title lang="fr">Article</title>
                 <title lang="de">Artikel</title>
             </meta>
         </property>
@@ -61,64 +57,102 @@
         <property name="events" type="event_selection">
             <meta>
                 <title lang="en">Event Highlights</title>
-                <title lang="fr">Evènement</title>
                 <title lang="de">Veranstaltungs Highlights</title>
             </meta>
         </property>
-        <block name="blocks" default-type="text" minOccurs="0">
-            <meta>
-                <title lang="en">Content</title>
-                <title lang="fr">Contenu</title>
-            </meta>
 
+        <block name="blocks" default-type="text-image">
             <types>
-                <type name="text">
+                <type name="text-image">
                     <meta>
-                        <title lang="en">Text</title>
-                        <title lang="fr">Texte</title>
+                        <title lang="en">Text image</title>
+                        <title lang="de">Text image</title>
                     </meta>
+
                     <properties>
                         <property name="title" type="text_line">
                             <meta>
                                 <title lang="en">Title</title>
-                                <title lang="fr">Titre</title>
+                                <title lang="de">Titel</title>
                             </meta>
                         </property>
-                    </properties>
-                </type>
 
-                <type name="gallery">
-                    <properties>
+                        <property name="article" type="text_editor">
+                            <meta>
+                                <title lang="en">Article</title>
+                                <title lang="de">Artikel</title>
+                            </meta>
+                        </property>
+
                         <property name="image" type="single_media_selection">
                             <meta>
                                 <title lang="en">Image</title>
-                                <title lang="fr">Image</title>
+                                <title lang="de">Bild</title>
                             </meta>
+
                             <params>
                                 <param name="types" value="image"/>
+
+                                <param name="defaultDisplayOption" value="left"/>
+                                <param name="displayOptions" type="collection">
+                                    <param name="left" value="true" />
+                                    <param name="right" value="true" />
+                                </param>
                             </params>
                         </property>
                     </properties>
                 </type>
 
                 <type name="quote">
+                    <meta>
+                        <title lang="en">Quote</title>
+                        <title lang="de">Zitat</title>
+                    </meta>
+
                     <properties>
-                        <property name="text" type="text_line">
+                        <property name="quote" type="text_area">
                             <meta>
-                                <title lang="en">Text</title>
-                                <title lang="fr">Texte</title>
+                                <title lang="en">Quote</title>
+                                <title lang="de">Zitat</title>
                             </meta>
                         </property>
+
                         <property name="author" type="text_line">
                             <meta>
                                 <title lang="en">Author</title>
-                                <title lang="fr">Auteur</title>
+                                <title lang="de">Autor</title>
                             </meta>
+                        </property>
+                    </properties>
+                </type>
+
+                <type name="gallery">
+                    <meta>
+                        <title lang="en">Gallery</title>
+                        <title lang="de">Galerie</title>
+                    </meta>
+
+                    <properties>
+                        <property name="title" type="text_line">
+                            <meta>
+                                <title lang="en">Title</title>
+                                <title lang="de">Titel</title>
+                            </meta>
+                        </property>
+
+                        <property name="images" type="media_selection">
+                            <meta>
+                                <title lang="en">Images</title>
+                                <title lang="de">Bilder</title>
+                            </meta>
+
+                            <params>
+                                <param name="types" value="image"/>
+                            </params>
                         </property>
                     </properties>
                 </type>
             </types>
         </block>
-
     </properties>
 </template>

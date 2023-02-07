@@ -2,79 +2,30 @@
 <list xmlns="http://schemas.sulu.io/list-builder/list">
     <key>event_registrations</key>
 
-<!--    <joins name="translation">-->
-<!--        <join>-->
-<!--            <entity-name>App\Entity\EventTranslation</entity-name>-->
-<!--            <field-name>App\Entity\Event.translations</field-name>-->
-<!--            <condition>App\Entity\EventTranslation.locale = :locale</condition>-->
-<!--        </join>-->
-<!--    </joins>-->
-
-<!--    <joins name="changer" ref="translation">-->
-<!--        <join>-->
-<!--            <entity-name>%sulu.model.user.class%_changer</entity-name>-->
-<!--            <field-name>App\Entity\EventTranslation.changer</field-name>-->
-<!--        </join>-->
-<!--        <join>-->
-<!--            <entity-name>%sulu.model.contact.class%_changer</entity-name>-->
-<!--            <field-name>%sulu.model.user.class%_changer.contact</field-name>-->
-<!--        </join>-->
-<!--    </joins>-->
-
-<!--    <joins name="creator" ref="translation">-->
-<!--        <join>-->
-<!--            <entity-name>%sulu.model.user.class%_creator</entity-name>-->
-<!--            <field-name>App\Entity\EventTranslation.creator</field-name>-->
-<!--        </join>-->
-<!--        <join>-->
-<!--            <entity-name>%sulu.model.contact.class%_creator</entity-name>-->
-<!--            <field-name>%sulu.model.user.class%_creator.contact</field-name>-->
-<!--        </join>-->
-<!--    </joins>-->
-
     <properties>
-        <property name="id" translation="sulu_admin.id">
+        <property name="id" visibility="no" translation="sulu_admin.id">
             <field-name>id</field-name>
-            <entity-name>App\Entity\EventRegistrations</entity-name>
+            <entity-name>App\Entity\EventRegistration</entity-name>
         </property>
 
-        <property name="email" visibility="always" translation="sulu_admin.email">
+        <property name="firstName" visibility="always" searchability="yes" translation="sulu_contact.first_name">
+            <field-name>firstName</field-name>
+            <entity-name>App\Entity\EventRegistration</entity-name>
+        </property>
+
+        <property name="lastName" visibility="always" searchability="yes" translation="sulu_contact.last_name">
+            <field-name>lastName</field-name>
+            <entity-name>App\Entity\EventRegistration</entity-name>
+        </property>
+
+        <property name="email" visibility="always" searchability="yes" translation="sulu_contact.email">
             <field-name>email</field-name>
-            <entity-name>App\Entity\EventRegistrations</entity-name>
-
-            <joins ref="translation"/>
+            <entity-name>App\Entity\EventRegistration</entity-name>
         </property>
 
-        <property name="firstname" visibility="always" translation="sulu_admin.firstname">
-            <field-name>firstname</field-name>
-            <entity-name>App\Entity\EventRegistrations</entity-name>
-
-            <joins ref="translation"/>
-        </property>
-
-        <property name="lastname" visibility="always" translation="sulu_admin.lastname">
-            <field-name>startDate</field-name>
-            <entity-name>App\Entity\EventRegistrations</entity-name>
-        </property>
-
-        <property name="events" translation="no" type="Event">
-            <field-name>events</field-name>
-            <entity-name>App\Entity\EventRegistrations</entity-name>
-        </property>
-
-<!--        <concatenation-property name="changer" translation="sulu_admin.changer" visibility="yes" searchability="yes">-->
-<!--            <field>-->
-<!--                <field-name>firstName</field-name>-->
-<!--                <entity-name>App\Entity\EventRegistrations</entity-name>-->
-
-<!--                <joins ref="changer"/>-->
-<!--            </field>-->
-<!--            <field>-->
-<!--                <field-name>lastName</field-name>-->
-<!--                <entity-name>App\Entity\EventRegistrations</entity-name>-->
-
-<!--                <joins ref="changer"/>-->
-<!--            </field>-->
-<!--        </concatenation-property>-->
+        <identity-property name="eventId" visibility="never">
+            <field-name>event</field-name>
+            <entity-name>App\Entity\EventRegistration</entity-name>
+        </identity-property>
     </properties>
 </list>

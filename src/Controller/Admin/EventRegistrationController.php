@@ -1,32 +1,29 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\Admin;
 
-use App\Entity\Event;
-use App\Entity\EventRegistrations;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Common\DoctrineListRepresentationFactory;
+use App\Entity\EventRegistration;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-
 class EventRegistrationController extends AbstractController
 {
-    #[Route('/admin/api/events/{event}/registrations', methods: ['GET'], name: 'app.get_event_registration_list')]
-    public function getEventRegistrations(EntityManagerInterface $em, Event $event): JsonResponse
+    public function __construct(private readonly DoctrineListRepresentationFactory $doctrineListRepresentationFactory)
     {
-        $eventRegistration = $em->getRepository(EventRegistrations::class)->find($event);
-        if ($eventRegistration === null) {
-            throw new \Exception('event registration not found.');
-        }
-        $registrations = array_map(static fn (EventRegistrations $registrations) => [
-            'id' => $registrations->getId(),
-            'email' => $registrations->getEmail(),
-            'firstname' => $registrations->getFirstname(),
-            'lastname' => $registrations->getLastname(),
-        ], $event->getEventRegistrations()->toArray());
-        $eventRegistrations = ['id' => $event->getId(), 'registrations' => $registrations];
-        return new JsonResponse($eventRegistrations, Response::HTTP_OK);
+    }
+
+    #[Route(path: '/admin/api/events/{eventId}/registrations', methods: ['GET'], name: 'app.get_event_registration_list')]
+    public function getListAction(int $eventId): Response
+    {
+        $listRepresentation = $this->doctrineListRepresentationFactory->createDoctrineListRepresentation(
+            EventRegistration::RESOURCE_KEY,
+            ['eventId' => (string) $eventId],
+        );
+
+        return $this->json($listRepresentation->toArray());
     }
 }
