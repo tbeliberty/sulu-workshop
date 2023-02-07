@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+{% block content %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">{{ content.title }}</h1>
+            <p class="lead text-muted">{{ content.article|raw }}</p>
+        </div>
+    </section>
+    <div class="container marketing">
+        <div class="row">
+            {% for event in content.events %}
+                <div class="col-lg-4 text-center">
+                    <h2 class="event-title">{{ event.resource.title }}</h2>
+                    <p>{{ event.resource.teaser }}</p>
+                    <p>
+                        <a class="btn btn-secondary" href="{{ path('app.event', {id: event.id}) }}" role="button">
+                            View details »
+                        </a>
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Titre</th>
+                    <th>Début</th>
+                    <th>Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for event in content.events %}
+                    <tr>
+                        <td>{{ event.resource.translations[app.request.getLocale()].title }}</td>
+                        <td>{{ event.resource.startDate|date('d-m-Y H:i') }}</td>
+                        <td>{{ event.resource.endDate|date('d-m-Y H:i') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
