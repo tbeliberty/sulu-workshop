@@ -46,9 +46,13 @@ class Event
 
     private string $locale;
 
+    #[ORM\OneToMany(mappedBy: 'events', targetEntity: EventRegistrations::class, orphanRemoval: true)]
+    private Collection $eventRegistrations;
+
     public function __construct()
     {
         $this->translations = new ArrayCollection();
+        $this->eventRegistrations = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -217,5 +221,35 @@ class Event
         $this->translations->set($locale, $translation);
 
         return $translation;
+    }
+
+    /**
+     * @return Collection<int, EventRegistrations>
+     */
+    public function getEventRegistrations(): Collection
+    {
+        return $this->eventRegistrations;
+    }
+
+    public function addEventRegistration(EventRegistrations $eventRegistration): self
+    {
+        if (!$this->eventRegistrations->contains($eventRegistration)) {
+            $this->eventRegistrations->add($eventRegistration);
+            $eventRegistration->setEvents($this);
+        }
+
+        return $this;
+    }
+
+    public function removeEventRegistration(EventRegistrations $eventRegistration): self
+    {
+        if ($this->eventRegistrations->removeElement($eventRegistration)) {
+            // set the owning side to null (unless already changed)
+            if ($eventRegistration->getEvents() === $this) {
+                $eventRegistration->setEvents(null);
+            }
+        }
+
+        return $this;
     }
 }
