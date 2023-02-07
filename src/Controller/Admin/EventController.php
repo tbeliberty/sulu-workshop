@@ -37,7 +37,7 @@ class EventController extends AbstractController
     ) {
     }
 
-    #[Route(path: '/admin/api/events/{id}', methods: ['GET'], name: 'app.get_event')]
+    #[Route(path: '/admin/api/events/{id}', name: 'app.get_event', methods: ['GET'])]
     public function getAction(int $id, Request $request): Response
     {
         $event = $this->load($id, $request);
@@ -48,7 +48,7 @@ class EventController extends AbstractController
         return $this->json($this->getDataForEntity($event));
     }
 
-    #[Route(path: '/admin/api/events/{id}', methods: ['PUT'], name: 'app.put_event')]
+    #[Route(path: '/admin/api/events/{id}', name: 'app.put_event', methods: ['PUT'])]
     public function putAction(int $id, Request $request): Response
     {
         $event = $this->load($id, $request);
@@ -58,26 +58,29 @@ class EventController extends AbstractController
 
         /** @var EventData $data */
         $data = $request->toArray();
-        $this->mapDataToEntity($data, $event);
+        $this->mapDataToEntity((array)$data, $event);
         $this->save($event);
 
         return $this->json($this->getDataForEntity($event));
     }
 
-    #[Route(path: '/admin/api/events', methods: ['POST'], name: 'app.post_event')]
+    /**
+     * @throws \Exception
+     */
+    #[Route(path: '/admin/api/events', name: 'app.post_event', methods: ['POST'])]
     public function postAction(Request $request): Response
     {
         $event = $this->create($request);
 
         /** @var EventData $data */
         $data = $request->toArray();
-        $this->mapDataToEntity($data, $event);
+        $this->mapDataToEntity((array)$data, $event);
         $this->save($event);
 
         return $this->json($this->getDataForEntity($event), 201);
     }
 
-    #[Route(path: '/admin/api/events/{id}', methods: ['POST'], name: 'app.post_event_trigger')]
+    #[Route(path: '/admin/api/events/{id}', name: 'app.post_event_trigger', methods: ['POST'])]
     public function postTriggerAction(int $id, Request $request): Response
     {
         $event = $this->eventRepository->findById($id, (string) $this->getLocale($request));
@@ -99,7 +102,7 @@ class EventController extends AbstractController
         return $this->json($this->getDataForEntity($event));
     }
 
-    #[Route(path: '/admin/api/events/{id}', methods: ['DELETE'], name: 'app.delete_event')]
+    #[Route(path: '/admin/api/events/{id}', name: 'app.delete_event', methods: ['DELETE'])]
     public function deleteAction(int $id): Response
     {
         $this->remove($id);
@@ -107,7 +110,7 @@ class EventController extends AbstractController
         return $this->json(null, 204);
     }
 
-    #[Route(path: '/admin/api/events', methods: ['GET'], name: 'app.get_event_list')]
+    #[Route(path: '/admin/api/events', name: 'app.get_event_list', methods: ['GET'])]
     public function getListAction(Request $request): Response
     {
         $listRepresentation = $this->doctrineListRepresentationFactory->createDoctrineListRepresentation(
@@ -120,7 +123,8 @@ class EventController extends AbstractController
     }
 
     /**
-     * @return EventData $data
+     * @param Event $entity
+     * @return array $data
      */
     protected function getDataForEntity(Event $entity): array
     {
@@ -137,14 +141,16 @@ class EventController extends AbstractController
                 : null,
             'teaser' => $entity->getTeaser(),
             'description' => $entity->getDescription(),
-            'startDate' => null !== $startDate ? $startDate->format('c') : null,
-            'endDate' => null !== $endDate ? $endDate->format('c') : null,
+            'startDate' => $startDate?->format('c'),
+            'endDate' => $endDate?->format('c'),
             'location' => $entity->getLocation(),
         ];
     }
 
     /**
-     * @param EventData $data
+     * @param array $data
+     * @param Event $entity
+     * @throws \Exception
      */
     protected function mapDataToEntity(array $data, Event $entity): void
     {

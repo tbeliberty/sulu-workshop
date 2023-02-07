@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: EventRegistrationsRepository::class)]
 class EventRegistrations
 {
+    const RESOURCE_KEY = 'event-registrations';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
