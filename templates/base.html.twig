@@ -43,6 +43,12 @@
                         {% endfor %}
                     </ul>
                 </div>
+
+                <div class="navbar-nav">
+                    {% for localization in localizations %}
+                        <a class="nav-link" href="{{ localization.url }}">{{ localization.locale }}</a>
+                    {% endfor %}
+                </div>
             </nav>
         </div>
     </header>
