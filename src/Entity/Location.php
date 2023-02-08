@@ -8,6 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: LocationRepository::class)]
 class Location
 {
+    const RESOURCE_KEY = 'location';
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

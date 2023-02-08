@@ -2,3 +2,9 @@
 controllers:
     resource: ../src/Controller/Admin/
     type: attribute
+
+app_location_api:
+    type: rest
+    prefix: /admin/api
+    resource: App\Controller\Admin\LocationController
+    name_prefix: app.

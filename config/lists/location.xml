@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<list xmlns="http://schemas.sulu.io/list-builder/list">
+    <key>location</key>
+
+    <properties>
+        <property name="id" translation="sulu_admin.id">
+            <field-name>id</field-name>
+            <entity-name>App\Entity\Location</entity-name>
+        </property>
+        <property name="name" visibility="always" translation="sulu_admin.name">
+            <field-name>name</field-name>
+            <entity-name>App\Entity\Location</entity-name>
+        </property>
+        <property name="street" visibility="always" translation="app.street">
+            <field-name>street</field-name>
+            <entity-name>App\Entity\Location</entity-name>
+        </property>
+        <property name="city" visibility="always" translation="app.city">
+            <field-name>city</field-name>
+            <entity-name>App\Entity\Location</entity-name>
+        </property>
+        <property name="countryCode" visibility="always" translation="app.country_code">
+            <field-name>city</field-name>
+            <entity-name>App\Entity\Location</entity-name>
+        </property>
+    </properties>
+</list>

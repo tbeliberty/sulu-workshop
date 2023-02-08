@@ -16,6 +16,9 @@ sulu_admin:
         event_registrations:
             routes:
                 list: app.get_event_registration_list
+        location:
+            routes:
+                list: app.get_location_list
 
     # Registering Selection Field Types in this section
     field_type_options:

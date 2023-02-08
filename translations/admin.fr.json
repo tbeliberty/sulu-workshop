@@ -1,0 +1,14 @@
+{
+    "app.events": "Evènements",
+    "app.image": "Image",
+    "app.registrations": "Enregistrements",
+    "app.teaser": "Bande-annonce",
+    "app.start_date": "Début",
+    "app.end_date": "Fin",
+    "app.enable_event": "Evènement activé",
+    "app.enabled": "Activé",
+    "app.location": "Localisation",
+    "app.street": "Rue",
+    "app.city": "Ville",
+    "app.country_code": "Code postal"
+}
